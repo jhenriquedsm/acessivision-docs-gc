@@ -1,0 +1,5 @@
+{
+  "nome": "AcessiVision API",
+  "versao": "1.0.0",
+  "endpoints": ["/auth/register", "/auth/login", "/upload"]
+}
