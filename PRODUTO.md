@@ -1,5 +1,3 @@
-# Cria o arquivo PRODUTO.md
-cat > PRODUTO.md << 'EOF'
 # AcessiVision — Documentação do Produto
 
 ## Descrição
@@ -8,6 +6,5 @@ descrições textuais em português, promovendo acessibilidade
 para pessoas com deficiência visual.
 
 ## Status
-* Status: Em Desenvolvimento
+* Status: Versão Homologada e Estável (Release v1.0.0)
 * Item de Configuração: Documentação inicial da API adicionada.
-EOF
