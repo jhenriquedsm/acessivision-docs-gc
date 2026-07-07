@@ -1,0 +1,47 @@
+name: CI - Validacao de Itens de Configuracao
+
+# Dispara o workflow em pushes e pull requests para as branches principais
+on:
+  push:
+    branches:
+      - main
+      - develop
+      - 'release/**'
+      - 'feature/**'
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  validar-itens-de-configuracao:
+    name: Validar PRODUTO.md e api-config.json
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositorio
+        uses: actions/checkout@v4
+
+      - name: Verificar existencia do PRODUTO.md
+        run: |
+          echo "Verificando item de configuracao PRODUTO.md..."
+          if [ -f "PRODUTO.md" ]; then
+            echo "OK: PRODUTO.md encontrado."
+            cat PRODUTO.md
+          else
+            echo "ERRO: PRODUTO.md nao encontrado."
+            exit 1
+          fi
+
+      - name: Validar sintaxe do api-config.json
+        run: |
+          if [ -f "config/api-config.json" ]; then
+            echo "Validando JSON de configuracao..."
+            python3 -m json.tool config/api-config.json > /dev/null
+            echo "OK: config/api-config.json e um JSON valido."
+          else
+            echo "AVISO: config/api-config.json ainda nao existe nesta branch."
+          fi
+
+      - name: Build concluido com sucesso
+        run: echo "Pipeline de validacao de configuracao executada com sucesso."
